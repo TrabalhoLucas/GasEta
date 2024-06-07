@@ -49,11 +49,18 @@ public class GasEtaActivity extends AppCompatActivity {
 
         controller = new CombustivelController(GasEtaActivity.this);
 
+        dados = controller.getListaDeDados();
 
 
-     //   controller.alterar(objAlteracao);
 
-        controller.deletar(50);
+
+        Combustivel objAlteracao = dados.get(1);
+
+        objAlteracao.setNomeDoCombustivel("**GASOLINA**");
+        objAlteracao.setPrecoDoCombustivel(5.8888888);
+        objAlteracao.setRecomendacao("**Abastecer com Gasolina**");
+
+        // controller.alterar(objAlteracao);
 
         editGasolina = findViewById(R.id.editGasolina);
         editEtanol = findViewById(R.id.editEtanol);
@@ -71,41 +78,35 @@ public class GasEtaActivity extends AppCompatActivity {
 
                 boolean isDadosOk = true;
 
-                if(TextUtils.isEmpty(editGasolina.getText())){
+                if (TextUtils.isEmpty(editGasolina.getText())) {
                     editGasolina.setError("* Obrigatório");
                     editGasolina.requestFocus();
                     isDadosOk = false;
                 }
 
-                if(TextUtils.isEmpty(editEtanol.getText())){
+                if (TextUtils.isEmpty(editEtanol.getText())) {
                     editEtanol.setError("* Obrigatório");
                     editEtanol.requestFocus();
                     isDadosOk = false;
                 }
 
-                if(isDadosOk){
+                if (isDadosOk) {
 
                     precoGasolina = Double.parseDouble(editGasolina.getText().toString());
                     precoEtanol = Double.parseDouble(editEtanol.getText().toString());
 
-                    recomendacao = UtilGasEta.calcularMelhorOpcao(precoGasolina,precoEtanol);
+                    recomendacao = UtilGasEta.calcularMelhorOpcao(precoGasolina, precoEtanol);
 
                     txtResultado.setText(recomendacao);
 
                     btnSalvar.setEnabled(true);
 
-
-                }else{
+                } else {
                     Toast.makeText(GasEtaActivity.this,
                             "Por favor, digite os dados obrigatórios...",
                             Toast.LENGTH_LONG).show();
                     btnSalvar.setEnabled(false);
                 }
-
-
-
-
-
             }
         });
 
@@ -125,8 +126,8 @@ public class GasEtaActivity extends AppCompatActivity {
                 combustivelEtanol.setNomeDoCombustivel("Etanol");
                 combustivelEtanol.setPrecoDoCombustivel(precoEtanol);
 
-                combustivelGasolina.setRecomendacao(UtilGasEta.calcularMelhorOpcao(precoGasolina,precoEtanol));
-                combustivelEtanol.setRecomendacao(UtilGasEta.calcularMelhorOpcao(precoGasolina,precoEtanol));
+                combustivelGasolina.setRecomendacao(UtilGasEta.calcularMelhorOpcao(precoGasolina, precoEtanol));
+                combustivelEtanol.setRecomendacao(UtilGasEta.calcularMelhorOpcao(precoGasolina, precoEtanol));
 
                 controller.salvar(combustivelGasolina);
                 controller.salvar(combustivelEtanol);
@@ -160,7 +161,7 @@ public class GasEtaActivity extends AppCompatActivity {
         });
 
         Toast.makeText(GasEtaActivity.this,
-                UtilGasEta.calcularMelhorOpcao(5.12,3.39),
+                UtilGasEta.calcularMelhorOpcao(5.12, 3.39),
                 Toast.LENGTH_LONG).show();
 
     }

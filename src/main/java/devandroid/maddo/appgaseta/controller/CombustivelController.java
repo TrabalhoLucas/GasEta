@@ -46,8 +46,6 @@ public class CombustivelController extends GasEtaDB {
 
         salvarObjeto("Combustivel", dados);
 
-
-
     }
 
     public List<Combustivel> getListaDeDados(){
@@ -67,9 +65,6 @@ public class CombustivelController extends GasEtaDB {
 
     }
 
-    public void deletar(int id){
-        deletarObjeto("Combustivel",id);
-    }
 
 
     public void limpar(){
